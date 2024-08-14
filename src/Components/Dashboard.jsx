@@ -1,8 +1,8 @@
 import axios from "axios";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Vote from "./Vote";
-import Loading from "./Loading";
+import Loading from "./Loading.jsx";
 import { jwtDecode } from "jwt-decode";
 
 const Dashboard = ({ userData, baseurl, isLoading }) => {
@@ -45,9 +45,15 @@ const Dashboard = ({ userData, baseurl, isLoading }) => {
             }
             // console.log(data.winner);
   return (
-    <div className={isLoading ? "hidden" : "visible"}>
-     
-      <Vote data={data} userData={userData} />
+    <div className="">
+    {isLoading ?
+    <>
+
+      <Loading />
+    </>
+      :
+      <Vote data={data} userData={userData} isLoading={isLoading} />
+    }
      
     </div>
   );

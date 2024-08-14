@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
-const Vote = ({data, userData}) =>{
+import Loading from "./Loading"
+const Vote = ({data, userData, isLoading}) =>{
     // setTimeout(() => {
         
     // }, 1000);
     return (
-        <div className="vote">
+        <div className="">
             Vote
             {userData.name}
      

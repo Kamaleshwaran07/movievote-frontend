@@ -8,6 +8,7 @@ import success from "../assets/check.png";
 import error from "../assets/cross.png";
 import eyesOpen from "../assets/view.png";
 import eyesclosed from "../assets/watch.png";
+import Loading from "./Loading.jsx";
 
 const Signup = ({ baseurl, navbarShow }) => {
   const [show, setShow] = useState(false);
@@ -77,6 +78,8 @@ const Signup = ({ baseurl, navbarShow }) => {
   return (
     <div className={navbarShow ? "blur-sm contrast-100" : "bg-base-100"}>
       <Toaster />
+      <Loading />
+
       <img src={heroImage} alt="seats" className="h-36 w-4/5 mx-auto mt-3 rounded" />
       <div className="flex flex-col items-center justify-center">
 

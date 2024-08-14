@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import * as yup from "yup";
 import heroImage from "../assets/theater-8921521_1920.jpg";
 import success from "../assets/check.png";
 import eye from "../assets/eye.png";
@@ -12,8 +11,9 @@ import mail from "../assets/mail.png";
 import eyesclosed from "../assets/watch.png";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import Loading from "./Loading.jsx";
 
-const Login = ({ baseurl, navbarShow, setUserData, userData,isLoading, setIsLoading }) => {
+const Login = ({ baseurl, navbarShow, setUserData, userData,isLoading, setIsLoading, }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
@@ -30,31 +30,36 @@ const Login = ({ baseurl, navbarShow, setUserData, userData,isLoading, setIsLoad
       setIsLoading(true)
       setUserData(response.data.user);
       console.log(response.data.user);
-      const token = response.data.token;
+      const token = response.data.token;      
       const expires = new Date(
         new Date(Date.now() + 24 * 60 * 60 * 1000)
       ).toUTCString();
       document.cookie = `token = ${token}; path=/; expires=${expires}; secure:true; sameSite:'none'; httpOnly:true;`;
-      
-      
       setTimeout(() => {
         setIsLoading(false)
         navigate('/dashboard')        
       }, 3000);
-      formik.resetForm();
       console.log(response.data);
     
       setTimeout(() => {
         toast.dismiss(response.data.message);
       }, 1000);
     } catch (error) {
-      toast.error(error.response.data.message);
+      // toast.error(error.response.data.message);
       console.log(error);
     }
   };
   return (
-    <div>
+    <div className="">
       <Toaster />
+    {isLoading ?
+    
+    <>
+
+    <Loading />
+    </>
+    :
+     (
       <div>
       <img
         src={heroImage}
@@ -119,6 +124,7 @@ const Login = ({ baseurl, navbarShow, setUserData, userData,isLoading, setIsLoad
         </button>
       </form>
       </div>     
+      )}
     </div>
   );
 };

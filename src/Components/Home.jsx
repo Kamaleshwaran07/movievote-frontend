@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios'
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dashboard from './Dashboard';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Signup from './Signup';
@@ -9,7 +9,7 @@ import Footer from './Footer';
 import Login from './Login';
 import ContactUs from './Contactus';
 import Homepage from './Homepage';
-import Loading from './Loading';
+import Loading from './Loading.jsx';
 
 const Home = () =>{
   const baseurl = 'http://localhost:5040'
@@ -50,11 +50,10 @@ const [isLoading, setIsLoading] = useState(false)
 // },[])
 // fetchdata()
   return(
-    <div className='h-screen' data-theme={changeTheme ? "night" : "mytheme"}>
+    <div className="h-screen" data-theme={changeTheme ? "night" : "mytheme"}>
        
       <Navbar setChangeTheme = {setChangeTheme} changeTheme = {changeTheme} show = {show} setShow={setShow} />
-      {/* <Loading isLoading ={isLoading}  /> */}
-
+    
       <Routes>
         <Route path='/signup' element={<Signup baseurl={baseurl} navbarShow = {show} isLoading ={isLoading} setIsLoading={setIsLoading} />}  />
         <Route path='/contactus' element={<ContactUs baseurl={baseurl} navbarShow = {show} isLoading ={isLoading} setIsLoading={setIsLoading} />}  />
@@ -64,8 +63,6 @@ const [isLoading, setIsLoading] = useState(false)
      <Route path='/' element={<Homepage navbarShow = {show} />} />
     
       </Routes>
-    
-      
       
     {/* <Footer /> */}
     </div>

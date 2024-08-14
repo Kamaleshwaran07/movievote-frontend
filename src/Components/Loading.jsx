@@ -1,8 +1,10 @@
-const Loading = ({isLoading})=>{
+import React from "react"
+
+const Loading = ()=>{
 return(
-    <div className={isLoading? "visible" : "hidden"}>
-        <h1>Loading...</h1>
+    <div className="top-[45%] left-[50%] absolute visible">
+       <span className="loading loading-bars loading-lg"></span>
     </div>
 )
 }
-export default Loading
+export default Loading    
