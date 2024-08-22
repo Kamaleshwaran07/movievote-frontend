@@ -4,22 +4,24 @@ import toast from "react-hot-toast";
 import Vote from "./Vote";
 import Loading from "./Loading.jsx";
 import { jwtDecode } from "jwt-decode";
+import Search from "./Search.jsx";
+import { useQuery } from "react-query";
 
-const Dashboard = ({ userData, baseurl, isLoading }) => {
+const Dashboard = ({ userData, baseurl,  }) => {
   const [name, setName] = useState("");
   const [userId, setId] = useState("");
   const [result, setResult] = useState("");
   const [winner, setWinner] = useState("");
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   useEffect(() => {
-   fetchData()
-  const cookie = document.cookie;
-
-   const token = jwtDecode(cookie);
+    //  fetchData()
+    const cookie = document.cookie;
   
-      setName(token.name);
-      setId(token.id);
-  }, []);
+     const token = jwtDecode(cookie);
+    
+        setName(token.name);
+        setId(token.id);
+    }, []);
   const fetchData = async ()=>{
     
     try {
@@ -34,7 +36,7 @@ const Dashboard = ({ userData, baseurl, isLoading }) => {
           }
         ))
             
-            setData(responses)
+            // setData(responses)
             
             
           console.log(responses)
@@ -43,18 +45,19 @@ const Dashboard = ({ userData, baseurl, isLoading }) => {
             catch (error) {
               console.error(error)}
             }
+  const {data, isLoading, error } = useQuery("movieDetails", fetchData)
+  if(isLoading) return <><Loading /></>
+  if(error) return <p>Error in Fetching the data</p>
+  
+ 
             // console.log(data.winner);
   return (
     <div className="">
-    {isLoading ?
-    <>
-
-      <Loading />
-    </>
-      :
-      <Vote data={data} userData={userData} isLoading={isLoading} />
-    }
      
+
+      <Vote data={data} userData={userData}  />
+      <Search baseurl = {baseurl} />
+   
     </div>
   );
 };

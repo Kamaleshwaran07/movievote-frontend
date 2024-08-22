@@ -14,6 +14,7 @@ const Vote = ({data, userData, isLoading}) =>{
       {/* <div>
       <Vote data = {data}  />
       </div> */}
+{data ? <>
 
       {data.map((movieDetail, index) => (
         <div key={index}>
@@ -21,6 +22,9 @@ const Vote = ({data, userData, isLoading}) =>{
           <p>{movieDetail.movie2.title}</p>
         </div>
       ))}
+</>
+      :"No data"
+}
           
            
           
